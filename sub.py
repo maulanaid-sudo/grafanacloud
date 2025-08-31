@@ -72,6 +72,7 @@ def on_message(client, userdata, msg):
         .field("temperature", float(temp))
         .field("alarm", int(alarm))
         .field("water_level", float(water_level))
+        .field("timestamp_local", timestamp_recv)
         #.time(datetime.now(timezone.utc), WritePrecision.S)  # gunakan waktu server
         .time(datetime.now(ZoneInfo("Asia/Shanghai")), WritePrecision.S)
     )
