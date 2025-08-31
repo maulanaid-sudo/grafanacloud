@@ -5,6 +5,7 @@ import paho.mqtt.client as mqtt
 from datetime import datetime, timezone
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
+from zoneinfo import ZoneInfo
 
 
 # ---- Konfigurasi MQTT ----
@@ -47,8 +48,10 @@ def on_message(client, userdata, msg):
     alarm, timestamp_device, water_level = cm3
 
     # Timestamp waktu pesan diterima (pakai waktu server)
+
     #timestamp_recv = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-    timestamp_recv = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    timestamp_recv = datetime.now(ZoneInfo("Asia/Shanghai")).strftime("%Y-%m-%d %H:%M:%S")
+
     # Cetak ke console
     print(f"{'Recv Time':<20}{'Send Interval':<15}{'CSQ':<8}{'Battery(V)':<12}{'Temp(°C)':<10}{'Alarm':<8}{'Device Time':<25}{'Water Level(m)':<15}")
     print(f"{timestamp_recv:<20}{send_interval:<15}{csq:<8}{battery:<12}{temp:<10}{alarm:<8}{timestamp_device:<25}{water_level:<15}")
@@ -69,7 +72,8 @@ def on_message(client, userdata, msg):
         .field("temperature", float(temp))
         .field("alarm", int(alarm))
         .field("water_level", float(water_level))
-        .time(datetime.now(timezone.utc), WritePrecision.S)  # gunakan waktu server
+        #.time(datetime.now(timezone.utc), WritePrecision.S)  # gunakan waktu server
+        .time(datetime.now(ZoneInfo("Asia/Shanghai")), WritePrecision.S)
     )
     write_api.write(bucket=INFLUX_BUCKET, org=INFLUX_ORG, record=point)
 
