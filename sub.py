@@ -7,7 +7,7 @@ from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 from zoneinfo import ZoneInfo
 
-
+#branch
 # ---- Konfigurasi MQTT ----
 BROKER = "broker.emqx.io"
 PORT = 1883
