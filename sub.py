@@ -11,7 +11,7 @@ from zoneinfo import ZoneInfo
 # ---- Konfigurasi MQTT ----
 BROKER = "broker.emqx.io"
 PORT = 1883
-TOPIC = "solchap/sensor"
+TOPIC = "solchap/sensor/dv00"
 USERNAME = "test1"
 PASSWORD = "test1"
 
@@ -23,7 +23,7 @@ CSV_HEADER = ["timestamp_recv", "send_interval", "csq", "battery", "temp", "alar
 INFLUX_URL = "https://us-east-1-1.aws.cloud2.influxdata.com"
 INFLUX_TOKEN = "_VdkOxvhWJXr9hRW63EBHs4X9xKTjWGYfAHf5C1cRy9bs2r2ZcrDgJfGj-4PNQnKfuF08XO87G83H2d4cFkr4g=="        # ganti sesuai konfigurasi
 INFLUX_ORG = "9d727829cff76921"
-INFLUX_BUCKET = "796ac4e7deecc69c"
+INFLUX_BUCKET = "ff35a93ad5126bd4"
 
 client_influx = InfluxDBClient(url=INFLUX_URL, token=INFLUX_TOKEN, org=INFLUX_ORG)
 write_api = client_influx.write_api(write_options=SYNCHRONOUS)
