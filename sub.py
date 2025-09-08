@@ -11,7 +11,7 @@ from zoneinfo import ZoneInfo
 # ---- Konfigurasi MQTT ----
 BROKER = "broker.emqx.io"
 PORT = 1883
-TOPIC = "solchap/data/dv01"
+TOPIC = "solchap/sensor"
 USERNAME = "test1"
 PASSWORD = "test1"
 
@@ -21,9 +21,9 @@ CSV_HEADER = ["timestamp_recv", "send_interval", "csq", "battery", "temp", "alar
 
 # ---- Konfigurasi InfluxDB ----
 INFLUX_URL = "https://us-east-1-1.aws.cloud2.influxdata.com"
-INFLUX_TOKEN = "iwQEKouSGB8wjRyrd-1neij0YsLaD-CFvj6rnM8NnOHMSlFZjL2ug142_pQM-BCFONRhzL1vYNXVJ0wMOPu4Cg=="        # ganti sesuai konfigurasi
-INFLUX_ORG = "IoT Engineer"
-INFLUX_BUCKET = "dca54c1d4a378a80"
+INFLUX_TOKEN = "_VdkOxvhWJXr9hRW63EBHs4X9xKTjWGYfAHf5C1cRy9bs2r2ZcrDgJfGj-4PNQnKfuF08XO87G83H2d4cFkr4g=="        # ganti sesuai konfigurasi
+INFLUX_ORG = "9d727829cff76921"
+INFLUX_BUCKET = "796ac4e7deecc69c"
 
 client_influx = InfluxDBClient(url=INFLUX_URL, token=INFLUX_TOKEN, org=INFLUX_ORG)
 write_api = client_influx.write_api(write_options=SYNCHRONOUS)
@@ -44,8 +44,8 @@ def on_message(client, userdata, msg):
     send_interval, csq, battery, temp = devstas
 
     # Ambil nilai CM3
-    cm3 = payload["params"]["CM3"]["value"].split(",")
-    alarm, timestamp_device, water_level = cm3
+    cm5 = payload["params"]["CM5"]["value"].split(",")
+    alarm, timestamp_device, water_level = cm5
 
     # Timestamp waktu pesan diterima (pakai waktu server)
 
